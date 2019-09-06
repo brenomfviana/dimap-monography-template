@@ -1,0 +1,90 @@
+% Papel: A4 – cor branca
+% Fonte: Times New Roman ou Arial- tamanho 12 – cor: preta. Nas citações com mais de 3 linhas, notas de rodapé, legendas e tabelas a fonte deve ter o tamanho 10.
+% Itálico: Deve ser usado nas palavras de outros idiomas. Esta orientação não se aplica às expressões latinas apud e et al.
+% Margens: Direita e inferior: 2cm / Esquerda e superior: 3cm
+% Parágrafos / Espaçamento: 1,5 entre linhas;
+
+\documentclass[a4paper,12pt,openany,oneside]{abntex2}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\input{defs.tex}
+\input{custom.tex}
+
+\begin{document}
+
+\frontmatter % = \pretextual
+\frenchspacing
+
+\pagenumbering{roman}
+
+\include{frontmatter/capa}
+\include{frontmatter/folha_rosto}
+\include{frontmatter/folha_aprovacao}
+
+\include{frontmatter/dedicatoria}
+\include{frontmatter/agradecimentos}
+\include{frontmatter/epigrafe}
+
+
+\renewcommand{\thepage}{\roman{page}}
+\setcounter{page}{1}
+
+\include{frontmatter/resumo}
+\include{frontmatter/abstract}
+
+% Lista de figuras
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures
+\cleardoublepage
+% Lista de tabelas
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables
+\cleardoublepage
+% Lista de algoritmos
+\listofalgorithms
+\addcontentsline{toc}{chapter}{Lista de algoritmos}
+\cleardoublepage
+% Lista de abreviaturas
+\printacronyms[include-classes=abbrev,heading=chapter*,name=Lista de abreviaturas e siglas]
+\cleardoublepage
+% Lista de símbolos
+\printacronyms[include-classes=symbols,heading=chapter*,name=Lista de símbolos]
+\cleardoublepage
+% Sumário
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+\cleardoublepage
+
+\mainmatter % = \textual
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
+
+\pagenumbering{arabic}
+
+\include{mainmatter/intro}
+\include{mainmatter/cap2}
+\include{mainmatter/cap3}
+\include{mainmatter/cap4}
+\include{mainmatter/cap5}
+\include{mainmatter/conclusao}
+
+\bibliography{mainmatter/refs}
+\bibliographystyle{abntex2-alf}
+\bibliographystyle{abntex2-num}
+
+
+\backmatter % = \postextual
+
+\begin{apendicesenv}
+\partapendices
+\include{backmatter/apendicea}
+\end{apendicesenv}
+
+\begin{anexosenv}
+\partanexos
+\include{backmatter/anexoa}
+\end{anexosenv}
+
+\end{document}

@@ -1,0 +1,170 @@
+\usepackage[brazil,hyperpageref]{backref}
+\usepackage[alf,bibjustif]{abntex2cite}
+\usepackage{indentfirst}
+\usepackage{microtype}
+
+\usepackage{mathptmx}
+\usepackage{url}
+\usepackage{dsfont}
+\usepackage{lmodern}
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+% \usepackage{changepage}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{geometry}
+\newgeometry{left=3cm,right=2cm,top=3cm,bottom=2cm}
+
+%%% UFRN
+% Padrão dos algoritmos
+\usepackage{algorithm}
+% \usepackage{algorithmic}
+% \usepackage{algorithmicx}
+\usepackage{algpseudocode}
+%
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd{\algorithmic}{\itemsep\z@}{\itemsep=-4pt}{}{}
+\makeatother
+%
+\makeatletter
+\newenvironment{breakablealgorithm}
+{% \begin{breakablealgorithm}
+\begin{center}
+ \refstepcounter{algorithm}% New algorithm
+ \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+ \renewcommand{\caption}[2][\relax]{% Make a new \caption
+   {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+   \ifx\relax##1\relax % #1 is \relax
+     \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+   \else % #1 is not \relax
+     \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+   \fi
+   \kern2pt\hrule\kern2pt
+ }
+}{% \end{breakablealgorithm}
+ \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+\end{center}
+}
+\renewcommand*{\ALG@name}{Algoritmo}
+\makeatother
+%
+\usepackage{setspace}
+\let\Algorithm\algorithm
+\renewcommand\algorithm[1][]{\Algorithm[#1]\setstretch{0.5}}
+%
+\renewcommand{\listalgorithmname}{Lista de algoritmos}
+\let\oldlistofalgorithms\listofalgorithms
+\let\oldnumberline\numberline%
+\newcommand{\algnumberline}[1]{Algoritmo~#1 -- }
+\renewcommand{\listofalgorithms}{%
+  \let\numberline\algnumberline%
+  \oldlistofalgorithms
+  \let\numberline\oldnumberline%
+}
+\usepackage{parskip}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@chapter}
+  {\addtocontents{loa}}
+  {\addtocontents{loa}{\protect\addvspace{0pt}}}
+  {}{}
+\makeatother
+% Declaracoes em Português
+\algrenewcommand\algorithmicend{\textbf{fim}}
+\algrenewcommand\algorithmicdo{\textbf{faça}}
+\algrenewcommand\algorithmicwhile{\textbf{enquanto}}
+\algrenewcommand\algorithmicfor{\textbf{para}}
+\algrenewcommand\algorithmicforall{\textbf{para cada}}
+\algrenewcommand\algorithmicif{\textbf{se}}
+\algrenewcommand\algorithmicthen{\textbf{então}}
+\algrenewcommand\algorithmicelse{\textbf{senão}}
+\algrenewcommand\algorithmicreturn{\textbf{devolve}}
+\algrenewcommand\algorithmicfunction{\textbf{função}}
+\algrenewcommand\algorithmicprocedure{\textbf{procedimento}}
+\algrenewcommand\algorithmicreturn{\textbf{retorna}}
+
+% Rearranja os finais de cada estrutura
+\algrenewtext{EndWhile}{\algorithmicend\ \algorithmicwhile}
+\algrenewtext{EndFor}{\algorithmicend\ \algorithmicfor}
+\algrenewtext{EndIf}{\algorithmicend\ \algorithmicif}
+\algrenewtext{EndFunction}{\algorithmicend\ \algorithmicfunction}
+
+% O comando For, a seguir, retorna 'para #1 -- #2 até #3 faça'
+\algnewcommand\algorithmicto{\textbf{até}}
+\algrenewtext{For}[3]%
+{\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
+
+
+% Lista de abreviaturas
+\usepackage{acro}
+\input{frontmatter/abreviaturas.tex}
+\newlist{acronyms}{description}{1}
+\newcommand*\addcolon[1]{\normalfont #1 --}
+\setlist[acronyms]{labelwidth=0em,leftmargin =0em,noitemsep,itemindent=0pt,font=\addcolon}
+\DeclareAcroListStyle{dimap}{list}{list=acronyms}
+\acsetup{list-style=dimap}
+\acsetup{first-style=short}
+\acsetup{hyperref=true}
+\acsetup{page-name=Abreviações}
+% Lista de símbolos
+\input{frontmatter/simbolos.tex}
+
+%%% Correções
+% Sumário
+\addtolength{\cftlastnumwidth}{-2em} % Editar de acordo com o indice de maior enumeração
+\cftsetindents{part}{0em}{\cftlastnumwidth}
+\cftsetindents{chapter}{0em}{\cftlastnumwidth}
+\cftsetindents{section}{0em}{\cftlastnumwidth}
+\cftsetindents{subsection}{0em}{\cftlastnumwidth}
+\cftsetindents{subsubsection}{0em}{\cftlastnumwidth}
+\cftsetindents{paragraph}{0em}{\cftlastnumwidth}
+\cftsetindents{subparagraph}{0em}{\cftlastnumwidth}
+\renewcommand{\cftsubsectionfont}{\normalfont\normalsize}
+\renewcommand{\cftsubsubsectionfont}{\normalfont\small}
+% Espaçamento do paragráfo
+\setlength{\parindent}{1.25cm}
+% Fonte da legenda
+\captionsetup{font=sf}
+% Fonte dos capítulos
+\renewcommand{\ABNTEXchapterfont}{\rmfamily\bfseries\selectfont}
+% URL links
+\hypersetup{pageanchor=false, colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black}
+% Cabeçalhos
+\renewcommand{\textual}{\pagestyle{abntchapfirst}\aliaspagestyle{chapter}{abntchapfirst}}
+% Autoref
+\renewcommand{\partautorefname}{Parte}
+\renewcommand{\appendixautorefname}{Apêndice}
+\renewcommand{\chapterautorefname}{Capítulo}
+\renewcommand{\sectionautorefname}{\uppercase{S}eção}
+\renewcommand{\subsectionautorefname}{\uppercase{S}ubseção}
+\renewcommand{\subsubsectionautorefname}{\uppercase{S}ubsubseção}
+\renewcommand{\figureautorefname}{Figura}
+\renewcommand{\tableautorefname}{Tabela}
+\renewcommand{\equationautorefname}{Equação}
+\newcommand{\algorithmautorefname}{Algoritmo}
+\renewcommand{\FancyVerbLineautorefname}{Linha}
+\renewcommand{\theoremautorefname}{Teorema}
+\renewcommand{\pageautorefname}{Página}
+\addto\extrasbrazil{
+  \def\sectionautorefname{Seção}
+  \def\subsectionautorefname{Subseção}
+  \def\subsubsectionautorefname{Subsubseção}
+}
+% Fix counter
+\usepackage{chngcntr}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+\counterwithin{equation}{chapter}
+\counterwithin{algorithm}{chapter}
+% Remove warnings
+\pdfstringdefDisableCommands{\let\uppercase\relax}
+%%%
