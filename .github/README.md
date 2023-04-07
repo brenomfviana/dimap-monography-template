@@ -1,6 +1,6 @@
 # dimap-monography-template
 
-DIMAp Monography Template for LaTeX.
+DIMAp Monography Template for LaTeX. DIMAp: Departamento de Informática e Matemática Aplicada.
 
 ## Features
 
